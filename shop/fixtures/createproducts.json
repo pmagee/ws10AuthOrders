@@ -1,0 +1,112 @@
+[
+    {
+      "model": "shop.product",
+      "pk": 1,
+      "fields": {
+        "category_id":1,
+        "name": "Television",
+        "description": "Sony 42inch LCD",
+        "stock": 3,
+        "price": 100.00
+        }
+    },
+    {
+        "model": "shop.product",
+        "pk": 2,
+        "fields": {
+          "category_id":2,
+          "name": "Book",
+          "description": "Mysteries of the Universe",
+          "stock": 4,
+          "price": 7.00
+          }
+      },
+      {
+        "model": "shop.product",
+        "pk": 3,
+        "fields": {
+          "category_id":3,
+          "name": "Fluffy socks",
+          "description": "Warm extra long socks",
+          "stock": 100,
+          "price": 2.00
+          }
+      },
+      {
+        "model": "shop.product",
+        "pk": 4,
+        "fields": {
+          "category_id":4,
+          "name": "Tumbler Glass",
+          "description": "Reject tumbler glasses",
+          "stock": 50,
+          "price": 1.00
+          }
+      },
+      {
+        "model": "shop.product",
+        "pk": 5,
+        "fields": {
+          "category_id":5,
+          "name": "Piano",
+          "description": "Grand, in need of tuning",
+          "stock": 9,
+          "price": 99.00
+          }
+      },
+      {
+        "model": "shop.product",
+        "pk": 6,
+        "fields": {
+          "category_id":4,
+          "name": "Chair",
+          "description": "Comfortable chair in good condition",
+          "stock": 1,
+          "price": 50.00
+          }
+      },
+      {
+        "model": "shop.product",
+        "pk": 7,
+        "fields": {
+          "category_id":1,
+          "name": "Washing Machine",
+          "description": "1600 rpm spin A+++ rated 10KG",
+          "stock": 2,
+          "price": 300.00
+          }
+      },
+      {
+        "model": "shop.product",
+        "pk": 8,
+        "fields": {
+          "category_id":4,
+          "name": "Water Jug",
+          "description": "Antique Crystal 21'",
+          "stock": 2,
+          "price": 75.00
+          }
+      },
+      {
+        "model": "shop.product",
+        "pk": 9,
+        "fields": {
+          "category_id":6,
+          "name": "Rowing machine",
+          "description": "Great for keeping fit'",
+          "stock": 1,
+          "price": 50.00
+          }
+      },
+      {
+        "model": "shop.product",
+        "pk": 10,
+        "fields": {
+          "category_id":6,
+          "name": "Junior tennis racket",
+          "description": "Never used",
+          "stock": 2,
+          "price": 15.00
+          }
+      }
+]

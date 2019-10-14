@@ -1,0 +1,44 @@
+[
+    {
+        "model": "shop.category",
+        "pk": 1,
+        "fields": {
+            "name": "Electrical and Electronics"
+        }
+    },
+    {
+        "model": "shop.category",
+        "pk": 2,
+        "fields": {
+            "name": "Books"
+        }
+    },
+    {
+        "model": "shop.category",
+        "pk": 3,
+        "fields": {
+            "name": "Clothes"
+        }
+    },
+    {
+        "model": "shop.category",
+        "pk": 4,
+        "fields": {
+            "name": "Household"
+        }
+    },
+    {
+        "model": "shop.category",
+        "pk": 5,
+        "fields": {
+            "name": "Musical Instruments"
+        }
+    },
+    {
+        "model": "shop.category",
+        "pk": 6,
+        "fields": {
+            "name": "Sports Equipment"
+        }
+    }
+]

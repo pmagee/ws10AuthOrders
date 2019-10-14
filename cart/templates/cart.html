@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">  
+        {% if messages %}
+            {% for msg in messages %}       
+                <div class="alert alert-success">
+                {{msg.message}}
+                </div>
+            {% endfor %}
+        {% endif %}         
+        <table class="table table-bordered table-hover table-condensed">
+            <thead>
+                <!-- The header row-->
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Item Price</th>
+                    <th>Total</th>
+                    <th>Quantity</th>
+                    <th>dec.</th>
+                    <th>inc.</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <!-- Start of For loop - For each p in products add a row -->
+                {% for cart_item in cart_items %}
+                <tr>
+                    <td>{{cart_item.product.name}}</td>
+                    <td>{{cart_item.product.description}}</td>
+                    <td>€{{cart_item.product.price}}</td>
+                    <td>{{cart_item.sub_total}}</td>
+                    <td>{{cart_item.quantity}}</td>
+                    <td><a href="{% url 'cart_remove' cart_item.product.id %}">  
+                        <span class="glyphicon glyphicon-minus-sign"></span></a></td>
+                    <td><a href="{% url 'add_cart' cart_item.product.id %}">  
+                            <span class="glyphicon glyphicon-plus-sign"></span></a></td>
+                </tr>
+                {% endfor %}
+                <!-- End of For loop -->
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-right"><strong>Basket Total: &euro; {{total}}</strong></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <p class="text-right">
+                    <a href="{% url 'full_remove' %}" class="btn btn-danger btn-sm">
+                        <span class="glyphicon glyphicon-trash"></span> Empty Cart</a>
+                </p>
+            </div>
+            <div class="col-md-6">
+                <p class="text-right">
+                    <a href="{% url 'order_create' %}" class="btn btn-success btn-sm">
+                        <span class="glyphicon glyphicon-euro"></span> Place Order</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
