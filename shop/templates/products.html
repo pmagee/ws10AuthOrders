@@ -22,7 +22,7 @@
             <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>Category</th>
+                <th>Image</th>
                 <th>Description</th>
                 <th>Stock</th>
                 <th>Price</th>
@@ -35,7 +35,7 @@
             <tr>
                 <td>{{product.id}}</td>
                 <td>{{product.name}}</td>
-                <td>{{product.category}}</td>
+                <td><img src="{{product.image_thumbnail.url}}" alt = "{{product.name}}"></td>
                 <td>{{product.description}}</td>
                 <td>{{product.stock}}</td>
                 <td>&euro;{{product.price}}</td>
