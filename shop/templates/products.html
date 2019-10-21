@@ -56,5 +56,19 @@
             {% endfor %}
         </tbody>
     </table>
+    <div class="mx-auto">
+			{% if products.paginator.num_pages > 1 %}
+				<hr>
+				<div class="text-center">
+					{% for pg in products.paginator.page_range %}
+						<a href="?page={{pg}}" class="btn btn-light btn-sm 
+								{% if orders.number == pg %}
+									active
+								{% endif %}">{{pg}}</a>
+					{% endfor %}
+					
+				</div>
+			{% endif %}
+	</div>
 </div>
 {% endblock content %}

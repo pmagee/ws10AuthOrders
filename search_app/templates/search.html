@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>On sale here</h1>
-<div class="col-sm-9">
+<div class="col-sm-12">
     <p class="text-center my_search_text">You have searched for: <b>"{{ query }}"</b></p>
     <!-- Search Form -->
     <form class="form-inline my-2 my-lg-0" action="{% url 'search_result' %}" method="get">

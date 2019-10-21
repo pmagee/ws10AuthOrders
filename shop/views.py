@@ -5,17 +5,30 @@ from django.contrib.auth.models import Group, User
 from .forms import SignUpForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
+from django.core.paginator import Paginator, EmptyPage, InvalidPage
 
 def product_list(request, category_id=None):
-    category = None
-    products = Product.objects.all()
-    ccat = Category.objects.annotate(num_products=Count('products'))
-    if(category_id):
-        category = get_object_or_404(Category, id=category_id)
-        products = products.filter(category=category)
-
-    return render(request, 'products.html',
+	category = None
+	p_page = None
+	products_list = Product.objects.all()
+	ccat = Category.objects.annotate(num_products=Count('products'))
+	if(category_id):
+		category = get_object_or_404(Category, id=category_id)
+		products_list = products_list.filter(category=category)
+	
+	paginator = Paginator(products_list, 3)
+	try:
+		page = int(request.GET.get('page','1'))
+	except:
+		page = 1
+	try:
+		products = paginator.page(page)
+	except (EmptyPage,InvalidPage):
+		products = paginator.page(paginator.num_pages)
+	
+	return render(request, 'products.html',
                     {'products': products,
+					'product':p_page,
                     'countcat':ccat})
 
 def signupView(request):

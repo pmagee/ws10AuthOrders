@@ -13,7 +13,7 @@
 		{% endfor %}
 	{% endif %}
 	<!-- Start of For loop - For each p in products add a row -->
-	{% for order in orders.object_list %}
+	{% for order in orders %}
 		<p>Order Number: {{order.id}}</p>
 		<p>Order Date: {{order.created}}</p>
 		<table class="table table-bordered table-hover table-condensed">					
@@ -56,7 +56,10 @@
 				<hr>
 				<div class="text-center">
 					{% for pg in orders.paginator.page_range %}
-						<a href="?page={{pg}}" class="btn btn-light btn-sm {% if products.number == pg %}active{% endif %}">{{pg}}</a>
+						<a href="?page={{pg}}" class="btn btn-light btn-sm 
+								{% if orders.number == pg %}
+									active
+								{% endif %}">{{pg}}</a>
 					{% endfor %}
 					
 				</div>
@@ -64,4 +67,10 @@
 	</div>
 </div>
 {% endblock content %}
+
+
+
+
+
+
 
