@@ -7,6 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from datetime import datetime, timezone
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, InvalidPage
 
 @login_required()
 def order_create(request, total=0, cart_items = None):
@@ -38,10 +39,20 @@ def order_create(request, total=0, cart_items = None):
 
 @login_required()
 def order_history(request):
-    if request.user.is_authenticated:
-        email = str(request.user.email)
-        order_details = Order.objects.filter(emailAddress=email)
-    return render(request, 'orders_list.html', {'order_details':order_details})
+    email = str(request.user.email)
+    order_details = Order.objects.filter(emailAddress=email)
+    o_page = None
+    '''Pagination code'''
+    paginator = Paginator(order_details, 3)
+    try:
+        page = int(request.GET.get('page','1'))
+    except:
+        page = 1
+    try:
+        orders = paginator.page(page)
+    except (EmptyPage,InvalidPage):
+        orders = paginator.page(paginator.num_pages)    
+    return render(request, 'orders_list.html', {'order':o_page, 'orders':orders})
 
 def cancel_order(request, order_id):
     order = get_object_or_404(Order, id=order_id)
@@ -49,8 +60,8 @@ def cancel_order(request, order_id):
     current_date = datetime.now(timezone.utc)
     date_diff = current_date - order_date
     minutes_diff = date_diff.total_seconds() / 60.0
-    if minutes_diff <= 30:      
-        order.adjust_stock(order_id)
+    if minutes_diff <= 30: 
+        adjust_stock(request, order_id)   
         order.delete()
         messages.add_message(request, messages.INFO, 
 					'Order is now cancelled')
@@ -59,4 +70,12 @@ def cancel_order(request, order_id):
 					'Sorry, it is too late to cancel this order')
     return redirect('order_history')
 
+def adjust_stock(request,order_id):    
+    order = get_object_or_404(Order, id=order_id)
+    order_items = OrderItem.objects.filter(order = order)
+    for oi in order_items:
+        product = get_object_or_404(Product, name=oi.product)
+        if oi.product == product.name:             
+            product.stock = product.stock + oi.quantity
+            product.save()
 

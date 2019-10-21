@@ -13,7 +13,7 @@
 		{% endfor %}
 	{% endif %}
 	<!-- Start of For loop - For each p in products add a row -->
-	{% for order in order_details %}
+	{% for order in orders.object_list %}
 		<p>Order Number: {{order.id}}</p>
 		<p>Order Date: {{order.created}}</p>
 		<table class="table table-bordered table-hover table-condensed">					
@@ -47,9 +47,21 @@
 			</div>  
         </div>
         <p>
-            <a href="{% url 'cancel_order' order.id %}"><button class="btn btn-primary">Cancel Order</button></a>
+            <a href="{% url 'cancel_order' order.id %}">
+				<button class="btn btn-primary">Cancel Order</button></a>
         </p>
 	{% endfor %}
+	<div class="mx-auto">
+			{% if orders.paginator.num_pages > 1 %}
+				<hr>
+				<div class="text-center">
+					{% for pg in orders.paginator.page_range %}
+						<a href="?page={{pg}}" class="btn btn-light btn-sm {% if products.number == pg %}active{% endif %}">{{pg}}</a>
+					{% endfor %}
+					
+				</div>
+			{% endif %}
+	</div>
 </div>
 {% endblock content %}
 

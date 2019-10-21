@@ -1,21 +1,9 @@
 <!-- templates/home.html -->
 {% extends 'base.html' %}
-
 {% block content %}
 <h1>On sale here</h1>
-<div class="col-sm-3">
-    <h4>Categories</h4>
-    <ul class="list-group">
-        <a href="{% url 'products' %}" class="list-group-item"> All Categories </a>
-        {% for c in countcat %} 
-            <a href="{{ c.get_absolute_url }}" class="list-group-item catheight">{{c.name}}     
-                    <span class="badge">{{c.num_products}}</span> 
-            </a> 
-        {% endfor %}
-    </ul>
-</div>
 <div class="col-sm-9">
-    <h4>Note that all products are second hand, unless otherwise stated.</h4>
+    <p class="text-center my_search_text">You have searched for: <b>"{{ query }}"</b></p>
     <!-- Search Form -->
     <form class="form-inline my-2 my-lg-0" action="{% url 'search_result' %}" method="get">
             {% csrf_token %}

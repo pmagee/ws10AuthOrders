@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% block metadescription %}
 	Sign up to get a new account with us. 
 {% endblock %}
@@ -17,7 +18,7 @@
                 <p>Enter the following information to create a new account.</p>
                 <form method="post">
                     {% csrf_token %}
-                    <p>{{ form  }}</p>
+                    <p>{{ form | crispy  }}</p>
                     <button type="submit" class="btn btn-secondary">Register Account</button>
                 </form>
                 <br>

@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
     'order.apps.OrderConfig',
+    'search_app.apps.SearchAppConfig',
+    'crispy_forms',
+    'imagekit',
 ]
 
 MIDDLEWARE = [
@@ -59,7 +62,8 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR,'templates'),os.path.join(BASE_DIR,'shop','templates/'),
                                             os.path.join(BASE_DIR,'cart','templates/'),
-                                            os.path.join(BASE_DIR,'order','templates/')],
+                                            os.path.join(BASE_DIR,'order','templates/'),
+                                            os.path.join(BASE_DIR,'search_app','templates/')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,3 +134,7 @@ LOGIN_URL = '/account/login/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+
