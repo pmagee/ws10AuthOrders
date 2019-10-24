@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'search_app.apps.SearchAppConfig',
     'crispy_forms',
     'imagekit',
+    'stripe',
 ]
 
 MIDDLEWARE = [
@@ -137,4 +138,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
-
+# settings.py
+STRIPE_SECRET_KEY = 'sk_test_T9tH2CsvS9UHGvyEteoJw0kp00CtRP8fFW'
+STRIPE_PUBLISHABLE_KEY = 'pk_test_1LejKB6SXY7Mppd9rVWdYhmX00n4DvV0GQ'

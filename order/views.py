@@ -8,23 +8,36 @@ from django.contrib.auth.decorators import login_required
 from datetime import datetime, timezone
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
+import stripe
 
 @login_required()
 def order_create(request, total=0, cart_items = None):
+    if request.method == 'POST':
+        cart = Cart.objects.get(cart_id=_cart_id(request))
+        cart_items = CartItem.objects.filter(cart=cart)
+        for item in cart_items:
+            total += (item.quantity * item.product.price)
+        print('Total', total)
+        charge = stripe.Charge.create(
+            amount=str(int(total*100)),
+            currency='EUR',
+            description='Credit card charge',
+            source=request.POST['stripeToken']
+        )
     if request.user.is_authenticated:
         email = str(request.user.email)
         order_details = Order.objects.create(emailAddress = email)
         order_details.save()
     try:
-        cart = Cart.objects.get(cart_id=_cart_id(request))
-        cart_items = CartItem.objects.filter(cart=cart)
+        #cart = Cart.objects.get(cart_id=_cart_id(request))
+        #cart_items = CartItem.objects.filter(cart=cart)
         for order_item in cart_items:
             oi = OrderItem.objects.create(
                     product = order_item.product.name,
                     quantity = order_item.quantity,
                     price = order_item.product.price,
                     order = order_details)
-            total += (order_item.quantity * order_item.product.price)
+            #total += (order_item.quantity * order_item.product.price)
             oi.save()
         
             '''Reduce stock when order is placed or saved'''

@@ -54,12 +54,23 @@
                         <span class="glyphicon glyphicon-trash"></span> Empty Cart</a>
                 </p>
             </div>
-            <div class="col-md-6">
-                <p class="text-right">
-                    <a href="{% url 'order_create' %}" class="btn btn-success btn-sm">
-                        <span class="glyphicon glyphicon-euro"></span> Place Order</a>
-                </p>
-            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                    <p class="text-right">
+                        <form action="{% url 'order_create' %}" method="POST">
+                            {% csrf_token %}
+                            <script
+                                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                data-key="{{data_key}}"
+                                data-name="OnLine Store"
+                                data-description="{{description}}"
+                                data-amount="{{stripe_total}}"
+                                data-currency="EUR"></script>
+                            </script>
+                        </form>
+                    </p>
+            </div> 
         </div>
     </div>
 </div>
